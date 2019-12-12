@@ -4,7 +4,7 @@ import {Container, Col} from 'react-bootstrap';
 class Footer extends Component {
     render(){
         return(
-            <Container className="mt-5">
+            <Container className="mt-5 fixed-bottom">
                 <Col className="text-center">
                     <p>All Rights Reserved by <a href="imartha.id" className="text-success">Gaptechnology Team</a> Copyright 2019</p>
                 </Col>

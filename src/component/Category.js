@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, Card, Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import {Container, Row, Col, Card} from 'react-bootstrap';
 
 class Category extends Component {
     render(){
@@ -17,7 +18,7 @@ class Category extends Component {
                 <Card.Text>
                   <p className="text-secondary">Masashi Kishimoto</p>
                 </Card.Text>
-                <Button variant="primary"style={{width: '100%'}}>Detail</Button>
+                <Link to="/detail" className="btn btn-primary" style={{width: '100%'}}>Detail</Link>
               </Card.Body>
             </Card>
             <Card style={{ width: '12rem' }}>
@@ -27,7 +28,7 @@ class Category extends Component {
                 <Card.Text>
                   <p className="text-secondary">Masashi Kishimoto</p>
                 </Card.Text>
-                <Button variant="primary"style={{width: '100%'}}>Detail</Button>
+                <Link to="/detail" className="btn btn-primary" style={{width: '100%'}}>Detail</Link>
               </Card.Body>
             </Card>
             </div>

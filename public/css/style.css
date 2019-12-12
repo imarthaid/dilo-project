@@ -5,3 +5,15 @@
 .height-30 {
     max-height: 300px !important;
 }
+
+.my-cart {
+    width: 100px;
+}
+
+i.fa-cart-plus {
+    color: #fff !important;
+}
+
+.my-cart i, .my-cart span:hover {
+    color: rgb(50, 173, 50) !important;
+}
