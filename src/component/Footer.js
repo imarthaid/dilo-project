@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {Container, Col} from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 
 class Footer extends Component {
     render(){
         return(
-            <Container className="mt-5 fixed-bottom">
-                <Col className="text-center">
+            <Row className="mt-5 bg-light" >
+                <Col className="text-center pt-3" >
                     <p>All Rights Reserved by <a href="imartha.id" className="text-success">Gaptechnology Team</a> Copyright 2019</p>
                 </Col>
-            </Container>
+            </Row>
         )
     }
 }

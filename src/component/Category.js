@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Container, Row, Col, Card} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
+import CardImage from './CardImage';
 
 class Category extends Component {
     render(){
@@ -8,29 +8,13 @@ class Category extends Component {
         <Container>
         <Row className="mt-5">
           <Col>
-          <h3 className="text-success">Komik</h3>
+          <h3 className="text-success">{this.props.title}</h3>
           <hr></hr>
           <div className="d-flex">
-            <Card style={{ width: '12rem' }} className="mr-1">
-              <Card.Img variant="top" src="img/naruto.jpg" className="height-20"/>
-              <Card.Body>
-                <Card.Title>Naruto Shippuden</Card.Title>
-                <Card.Text>
-                  <p className="text-secondary">Masashi Kishimoto</p>
-                </Card.Text>
-                <Link to="/detail" className="btn btn-primary" style={{width: '100%'}}>Detail</Link>
-              </Card.Body>
-            </Card>
-            <Card style={{ width: '12rem' }}>
-              <Card.Img variant="top" src="img/conan.jpg" className="height-20"/>
-              <Card.Body>
-                <Card.Title>Detective Conan</Card.Title>
-                <Card.Text>
-                  <p className="text-secondary">Masashi Kishimoto</p>
-                </Card.Text>
-                <Link to="/detail" className="btn btn-primary" style={{width: '100%'}}>Detail</Link>
-              </Card.Body>
-            </Card>
+            <CardImage linkgambar="img/naruto.jpg"/>
+            <CardImage linkgambar="img/conan.jpg"/>
+            <CardImage linkgambar="img/onepiece.jpeg"/>
+            <CardImage linkgambar="img/tsubasa.jpg"/>
             </div>
           </Col>
         </Row>
