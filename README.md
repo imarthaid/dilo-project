@@ -1,68 +1,238 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Persiapan Membuat Web Part 1 - Membuat Rest API Node Js Menggunakan Framework Express
 
-## Available Scripts
 
-In the project directory, you can run:
+## Persiapan sebelum memulai membuat Rest API
+Untuk membuka terminal di Vs Code menggunakan shortcut ctrl + `
+```
+npm init
+```
+Tekan `enter` sampai terminal berhenti
 
-### `npm start`
+Untuk menjalankan Rest API yang dibuat agar otomatis restart pada saat terjadi perubahan gunakan `nodemon` untuk menjalankannya
+```
+npm i -g nodemon
+```
+p.s kalau sudah pernah menginstall `nodemon`, tidak usah diinstall lagi
+## 1. Install `express`
+```
+npm i express
+```
+atau
+```
+npm i express
+```
+## 2. Inisialisi express
+buat file `app.js`, lalu tuliskan syntax dibawah
+```javascript
+const express = require('express');
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+const app = express();
+```
+## 3. Inisialisasi `port`
+Untuk port biasanya menggunakan port 3000
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+p.s untuk port sebenarnya tidak ada aturan khusus, port bisa 4000, 5000 atau 4001 dst
+```javascript
+const express = require('express');
 
-### `npm test`
+const port = 3000;
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const app = express();
 
-### `npm run build`
+app.listen(port, function() {
+  console.log('Server Ready on http://localhost:' + port);
+});
+```
+jalankan server menggunakan `nodemon`
+```
+nodemon app.js
+```
+nah sekarang server sudah connect di link http://localhost:3000 dan bisa dibuka di web
+## 4. Mengirimkan data melalui method `GET` dari express
+```javascript
+const express = require('express');
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const port = 8080;
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+const app = express();
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+app.get('/', function(req, res) {
+  res
+    .send('Hello World!');
+})
 
-### `npm run eject`
+app.listen(port, function() {
+  console.log('Server Ready on http://localhost:' + port)
+});
+```
+sekarang coba buka browser dan masukkan url yang sudah dibuat yaitu http://localhost:3000
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Persiapan Membuat Web Part 2 - Menghubungkan Server Dengan Database Mongoose
+## 1. Membuat Database Mongodb di https://mlab.com
+Registrasi di situs https://mlab.com menggunakan email masing-masing. Kemudian buat database, lalu bua username dan password untuk databasenya.
+## 2. Install `mongoose` sebagai penghubung ke server mongodb
+```
+npm i mongoose
+```
+## 3. Inisialisasi mongoose dan koneksikan dengan database mlab `(app.js)`
+```javascript
+const express = require('express');
+const mongoose = require('mongoose');
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+mongoose.connect('link di mlab')
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+const port = 3000;
 
-## Learn More
+const app = express();
+const db = mongoose.connection;
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Success connect to database!')
+});
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+app.get('/', function(req, res) {
+  res
+    .send('Hello World!');
+})
 
-### Code Splitting
+app.listen(port, function() {
+  console.log('Server Ready on http://localhost:' + port)
+});
+```
+## 4. Buat `Model` Sederhana menggunakan mongoose `(model.js)`
+```javascript
+const mongoose = require('mongoose');
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+const Schema = mongoose.Schema;
 
-### Analyzing the Bundle Size
+const AttendanceSchema = new Schema({
+  name: String,
+  address: String,
+  email: String,
+  phone: String
+}, {
+  timestamps: true
+});
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+const Attendance = mongoose.model('Attendance', AttendanceSchema);
 
-### Making a Progressive Web App
+module.exports = Attendence;
+```
+Model sudah bisa digunakan
+## 5. Setting agar bisa mendapatkan data dari `req.body` di `app.js`
+Install cors sebagai penghubung server dan UI
+```
+npm i cors
+```
+Kemudian gunakan cors dengan menggunakan `app.use` dan tambahan setting lainnya
+```javascript
+const express = require('express');
+const mongoose = require('mongoose');
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+mongoose.connect('link di mlab')
 
-### Advanced Configuration
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+const port = 3000;
 
-### Deployment
+const app = express();
+const db = mongoose.connection;
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Success connect to database!')
+});
 
-### `npm run build` fails to minify
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+app.get('/', function(req, res) {
+  res
+    .send('Hello World!');
+})
+
+app.listen(port, function() {
+  console.log('Server Ready on http://localhost:' + port)
+});
+```
+## 5. Gunakan `Model Attandance` di `app.js`
+```javascript
+const express = require('express');
+const mongoose = require('mongoose');
+
+mongoose.connect('link di mlab')
+
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
+const port = 3000;
+
+const Attandance = require('./model.js');
+
+const app = express();
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('Success connect to database!')
+});
+
+app.get('/', function(req, res) {
+  Attandance
+    .find({})
+    .then(data => {
+      res
+        .json({
+          data
+        })
+    })
+    .catch(error => {
+      res
+        .json({
+          error: error.message
+        })
+    })
+})
+
+app.post('/create', function(req, res) {
+  const person = req.body
+
+  Attandance
+    .create({
+      name: person.name,
+      address: person.address,
+      email: person.email,
+      phone: person.phone
+    })
+    .then(data => {
+      res
+        .json({
+          data
+        })
+    })
+    .catch(error => {
+      res
+        .json({
+          error: error.message
+        })
+    });
+})
+
+app.listen(port, function() {
+  console.log('Server Ready on http://localhost:' + port)
+});
+```
+Untuk testing input bisa menggunakan aplikasi `Insomnia` sebagai REST client.
+
+Setelah melakukan input di `Insomnia`, buka http://localhost:3000 dan lihat apakah data sudah sesuai dengan apa yang sudah kita input.
+
+Data nantinya akan digunakan untuk `UI (User Interface)`
