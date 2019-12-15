@@ -6,7 +6,7 @@ class Regist extends Component {
     render(){
         return (
             <Container className="mt-5" style={{minHeight: '600px'}}>
-                <Col md={6} className="mx-auto bg-secondary rounded px-4">
+                <Col md={6} className="mx-auto rounded px-4" style={{backgroundColor: '#fafafa'}}>
                     <div className="regist">
                     <div className="text-center mb-3">
                             <h4 className="pt-3 text-light">Regist</h4>
@@ -14,10 +14,19 @@ class Regist extends Component {
                         <Form>
                             <Form.Group as={Row} controlId="">
                                 <Form.Label column sm="3">
+                                Name
+                                </Form.Label>
+                                <Col sm="9">
+                                <Form.Control type="text" placeholder="" autocomplete="off" />
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group as={Row} controlId="">
+                                <Form.Label column sm="3">
                                 Email
                                 </Form.Label>
                                 <Col sm="9">
-                                <Form.Control type="text" placeholder="Email" autocomplete="off" />
+                                <Form.Control type="text" placeholder="" autocomplete="off" />
                                 </Col>
                             </Form.Group>
 
@@ -26,7 +35,16 @@ class Regist extends Component {
                                 Password
                                 </Form.Label>
                                 <Col sm="9">
-                                <Form.Control type="password" placeholder="Password" />
+                                <Form.Control type="password" placeholder="" />
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group as={Row} controlId="formPlaintextPassword">
+                                <Form.Label column sm="3">
+                                Konf Password
+                                </Form.Label>
+                                <Col sm="9">
+                                <Form.Control type="password" placeholder="" />
                                 </Col>
                             </Form.Group>
                             

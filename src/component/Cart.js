@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Container, Col } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 class Cart extends Component {
     render(){
@@ -68,8 +69,27 @@ class Cart extends Component {
                                 <p className="text-secondary float-left" style={{margin: '0', padding: '0'}}>JNE</p>
                                 <p className="text-info text-right" style={{margin: '0', padding: '0'}}>Rp <span className="ml-3">50.000</span></p>
                             </div>
+
+                            <hr/>
+
+                            <div className="info-box">
+                                <h5 className="float-left">Total</h5>
+                                <p className="text-primary text-right" style={{margin: '0', padding: '0'}}>Rp <span className="ml-3">250.000</span></p>
+                            </div>
+
+                            <Link to="/" className="btn btn-secondary mt-5 mr-3" style={{width: '150px'}}>
+                            Cancel
+                            </Link>
+
+                            <Link to="/checkout" className="btn btn-success mt-5" style={{width: '150px'}}>
+                            Checkout
+                            </Link>
                         </div>
+
+                        
                     </div>
+
+                    
 
                     
                 </Col>

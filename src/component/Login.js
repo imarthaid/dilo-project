@@ -6,7 +6,7 @@ class Login extends Component {
     render(){
         return(
             <Container className="mt-5" style={{minHeight: '600px'}}>
-                <Col md={6} className="mx-auto bg-secondary rounded px-4">
+                <Col md={6} className="mx-auto rounded px-4" style={{backgroundColor: '#fafafa'}}> 
                     <div className="regist">
                         <div className="text-center mb-3">
                             <h4 className="pt-3 text-light">Login</h4>
