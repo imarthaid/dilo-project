@@ -49,7 +49,7 @@ class Regist extends Component {
                             </Form.Group>
                             
                             <div className="text-right">
-                            <Button type="submit" className="btn btn-dark px-4">Regist</Button>
+                            <Button type="submit" className="btn btn-success px-4">Regist</Button>
                             </div>
                         </Form>
                     </div>
